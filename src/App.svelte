@@ -3,11 +3,15 @@
   import Cell from "./Cell.svelte";
   import Article from "./Article.svelte";
 	import Gallery from "./Gallery.svelte";
-	import ActionSheet from "./ActionSheet.svelte";
+  import ActionSheet from "./ActionSheet.svelte";
+  import Dialog from "./Dialog.svelte";
 
 	let isShowAlert = false;
 	let isShowActionSheet = false;
-	let actionSheetType = 'ios';
+  let actionSheetType = 'ios';
+  let isShowDialog = false;
+  let dialogType = 'ios';
+  let dialogContent = '弹窗内容';
 
   let forms = ["Button", "Input", "List", "Slider", "Uploader"];
   let basics = [
@@ -35,12 +39,30 @@
 		// 通过函数式调用更改actionsheet组件显示类型
 		actionSheetType = 'ios';
 		isShowActionSheet = true;
-	}
+  }
+  
+  const showDialog = () => {
+    dialogType = 'ios';
+    isShowDialog = true;
+    dialogContent = '弹窗内容....'
+  }
+
+  const showAndroidDialog = () => {
+    dialogType = 'android';
+    isShowDialog = true;
+    dialogContent = '弹窗内容....'
+  }
 </script>
 
 <style>
+  .page {
+    height: 100%;
+    overflow: auto;
+  }
   .page__hd {
+    height: 100%;
     padding: 40px;
+    overflow: auto;
   }
 </style>
 
@@ -56,6 +78,12 @@
     </button>
 		<button class="weui-btn weui-btn_default" on:click={showActionSheet}>
       打开ActionSheet
+    </button>
+		<button class="weui-btn weui-btn_default" on:click={showDialog}>
+      打开Dialog
+    </button>
+    <button class="weui-btn weui-btn_default" on:click={showAndroidDialog}>
+      打开Android Dialog
     </button>
     <div class="weui-cells__title">表单</div>
     {#each basics as item (item)}
@@ -145,6 +173,21 @@
 				isShowActionSheet = false;
 			}}
 		/>
+    <Dialog
+      type={dialogType}
+      title={'默认标题'}
+      content={dialogContent}
+      isShow={isShowDialog}
+      isMaskCancel={false}
+      on:ok={e => {
+        console.log(e.detail);
+				isShowDialog = e.detail.isShow;
+			}}
+			on:cancel={e => {
+        console.log(e.detail);
+				isShowDialog = false;
+			}}
+    />
 
   </div>
 </div>

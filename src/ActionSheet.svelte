@@ -22,6 +22,10 @@
     const handleClose = (value) => {
         dispatcher('cancel', value);
     }
+
+    const handleMoveTouch = (e) => {
+        e.preventDefault();
+    }
 </script>
 
 <style>
@@ -30,9 +34,9 @@
     }
 </style>
 
-<div class={type === 'android' ? 'weui-skin_android weui-mask_transition' : ''} style={isShow ? "opacity: 1;" : "opacity: 0; display: none;"}>
-    <div class="weui-mask weui-mask_transition" id="iosMask" style={isShow ? "opacity: 1;" : "opacity: 0; display: none;"} on:click={handleMaskClose}></div>
-    <div class={isShow ? "weui-actionsheet weui-actionsheet_toggle" : "weui-actionsheet"} id="iosActionsheet">
+<div class={type === 'android' ? 'weui-skin_android weui-mask_transition' : ''}>
+    <div class="weui-mask weui-mask_transition" style={isShow ? "opacity: 1;" : "opacity: 0; display: none;"} on:click={handleMaskClose} on:movetouch={handleMoveTouch}></div>
+    <div class={isShow ? "weui-actionsheet weui-actionsheet_toggle" : "weui-actionsheet"}>
         { #if title && type === 'ios' }
         <div class="weui-actionsheet__title">
             <p class="weui-actionsheet__title-text">{ title }</p>
@@ -44,7 +48,7 @@
             { /each }
         </div>
         <div class="weui-actionsheet__action">
-            <div class="weui-actionsheet__cell" id="iosActionsheetCancel" on:click={() => { handleClose(); }}>取消</div>
+            <div class="weui-actionsheet__cell" on:click={() => { handleClose(); }}>取消</div>
         </div>
     </div>
 </div>
