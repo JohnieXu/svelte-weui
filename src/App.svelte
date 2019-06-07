@@ -1,17 +1,22 @@
 <script>
   import Alert from "./Alert.svelte";
-  import Cell from "./Cell.svelte";
   import Article from "./Article.svelte";
 	import Gallery from "./Gallery.svelte";
   import ActionSheet from "./ActionSheet.svelte";
   import Dialog from "./Dialog.svelte";
+  import Cells from "./components/Cell/Cells.svelte";
+  import CellsTitle from "./components/Cell/CellsTitle.svelte";
+  import Cell from "./components/Cell/Cell.svelte";
+  import CellHeader from "./components/Cell/CellHeader.svelte";
+  import CellBody from "./components/Cell/CellBody.svelte";
+  import CellFooter from "./components/Cell/CellFooter.svelte";
 
 	let isShowAlert = false;
 	let isShowActionSheet = false;
   let actionSheetType = 'ios';
   let isShowDialog = false;
   let dialogType = 'ios';
-  let dialogContent = '弹窗内容';
+  let dialogContent = '弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内';
 
   let forms = ["Button", "Input", "List", "Slider", "Uploader"];
   let basics = [
@@ -44,13 +49,11 @@
   const showDialog = () => {
     dialogType = 'ios';
     isShowDialog = true;
-    dialogContent = '弹窗内容....'
   }
 
   const showAndroidDialog = () => {
     dialogType = 'android';
     isShowDialog = true;
-    dialogContent = '弹窗内容....'
   }
 </script>
 
@@ -64,12 +67,24 @@
     padding: 40px;
     overflow: auto;
   }
+  .page__title {
+    font-size: 0;
+    margin-bottom: 15px;
+  }
+  .page_desc {
+    margin-top: 4px;
+    color: rgba(0,0,0,.5);
+    text-align: left;
+    font-size: 14px;
+  }
 </style>
 
 <div class="page">
   <div class="page__hd">
-    <h1>WeUI</h1>
-    <p>
+    <div class="page__title">
+      <img src="/weui.png" alt="WeUI" height="21" />
+    </div>
+    <p class="page_desc">
       WeUI
       是一套同微信原生视觉体验一致的基础样式库，由微信官方设计团队为微信内网页和微信小程序量身设计，令用户的使用感知更加统一。
     </p>
@@ -85,67 +100,15 @@
     <button class="weui-btn weui-btn_default" on:click={showAndroidDialog}>
       打开Android Dialog
     </button>
-    <div class="weui-cells__title">表单</div>
-    {#each basics as item (item)}
-      <div class="weui-cells">
-        <a class="weui-cell weui-cell_access" href="javascript:;">
-          <div class="weui-cell__bd">
-            <p>{item}</p>
-          </div>
-          <div class="weui-cell__ft" />
-        </a>
-      </div>
-    {/each}
 
-    <div class="weui-cells__title">基础组件</div>
-    {#each forms as item (item)}
-      <div class="weui-cells">
-        <a class="weui-cell weui-cell_access" href="javascript:;">
-          <div class="weui-cell__bd">
-            <p>{item}</p>
-          </div>
-          <div class="weui-cell__ft" />
-        </a>
-      </div>
-    {/each}
-
-    <div class="weui-cells__title">操作反馈</div>
-    {#each actions as item (item)}
-      <div class="weui-cells">
-        <a class="weui-cell weui-cell_access" href="javascript:;">
-          <div class="weui-cell__bd">
-            <p>{item}</p>
-          </div>
-          <div class="weui-cell__ft" />
-        </a>
-      </div>
-    {/each}
-
-    <div class="weui-cells__title">导航相关</div>
-    {#each navigators as item (item)}
-      <div class="weui-cells">
-        <a class="weui-cell weui-cell_access" href="javascript:;">
-          <div class="weui-cell__bd">
-            <p>{item}</p>
-          </div>
-          <div class="weui-cell__ft" />
-        </a>
-      </div>
-    {/each}
-
-    <div class="weui-cells__title">搜索相关</div>
-    {#each searchs as item (item)}
-      <div class="weui-cells">
-        <a class="weui-cell weui-cell_access" href="javascript:;">
-          <div class="weui-cell__bd">
-            <p>{item}</p>
-          </div>
-          <div class="weui-cell__ft" />
-        </a>
-      </div>
-    {/each}
-
-    <div class="weui-cells__title">层级规范</div>
+    <Cells>
+      <CellsTitle>标题</CellsTitle>
+      <Cell access href="#">
+        <CellHeader>header</CellHeader>
+        <CellBody>body</CellBody>
+        <CellFooter>footer</CellFooter>
+      </Cell>
+    </Cells>
 
     <Alert
       isShow={isShowAlert}
@@ -175,7 +138,7 @@
 		/>
     <Dialog
       type={dialogType}
-      title={'默认标题'}
+      title={'不传递title则不展示标题'}
       content={dialogContent}
       isShow={isShowDialog}
       isMaskCancel={false}

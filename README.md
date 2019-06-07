@@ -1,4 +1,4 @@
-*Psst �looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+*Psst �looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
 
 ---
 
@@ -66,3 +66,57 @@ Then, from within your project folder:
 npm run build
 surge public
 ```
+
+## Components
+- common 通用组件
+  - [ ] Cell
+  - [ ] Cells
+  - [ ] Flex
+  - [ ] Label
+  - [ ] Mask
+- form 表单组件
+  - [ ] Agreement
+  - [ ] Checkbox
+  - [ ] Form
+  - [ ] FormCell
+  - [ ] Input
+  - [ ] Radio
+  - [ ] List
+  - [ ] Select
+  - [ ] Slider
+  - [ ] Switch
+  - [ ] Textarea
+  - [ ] Uploader
+  - [ ] Vcode
+- basic 基础组件
+  - [ ] Article
+  - [ ] Badge
+  - [ ] Button
+  - [ ] Flex
+  - [ ] Footer
+  - [ ] Gallery
+  - [ ] Grid
+  - [ ] Icons
+  - [ ] Loadmore
+  - [ ] Mediabox
+  - [ ] Page
+  - [ ] Panel
+  - [ ] Picker
+  - [ ] Preview
+  - [ ] Progress
+  - [ ] PullToRefresh
+  - [ ] Swiper
+  - [ ] Tab
+- feedback 操作反馈
+  - [x] ActionSheet
+  - [x] Dialog
+  - [ ] Msg
+  - [ ] Picker
+  - [ ] Popup
+  - [ ] Toast
+  - [ ] Toptips
+- navigation 导航相关
+  - [ ] NavBar
+  - [ ] TabBar
+- search 搜索相关
+  - [ ] SearchBar

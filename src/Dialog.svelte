@@ -9,12 +9,14 @@
     export let content;
     export let mainButton = {
       text: '主操作',
-      onClick: () => {}
+      onClick: () => {
+        handleClose({
+          isShow: false,
+          value: 1
+        });
+      }
     }
-    export let subButton = {
-      text: '辅操作',
-      onClick: () => {}
-    }
+    export let subButton;
 
     const handleMaskClose = () => {
         if (!isMaskCancel) return;
@@ -67,10 +69,14 @@
 <div in:fade={{ duration: 200 }}>
   <div class="weui-mask" on:click={handleMaskClose} on:movetouch={handleMoveTouch}></div>
   <div class={type === 'android' ? 'weui-dialog weui-skin_android' : 'weui-dialog'}>
+      {#if title}
       <div class="weui-dialog__hd"><strong class="weui-dialog__title">{title}</strong></div>
+      {/if}
       <div class="weui-dialog__bd">{content}</div>
       <div class="weui-dialog__ft">
+          {#if subButton}
           <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" on:click={handleMainButtonClick}>{subButton.text}</a>
+          {/if}
           <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" on:click={handleSubButtonClick}>{mainButton.text}</a>
       </div>
   </div>
